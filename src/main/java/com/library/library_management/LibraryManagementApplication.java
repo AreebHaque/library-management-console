@@ -36,7 +36,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("🚀 VIT Bhopal Library Management System");
+		System.out.println("VIT Bhopal Library Management System");
 		System.out.println("=======================================");
 
 		showMainMenu();
@@ -53,7 +53,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 	}
 
 	private void showLoginMenu() {
-		System.out.println("\n🔐 LOGIN MENU");
+		System.out.println("\n LOGIN MENU");
 		System.out.println("1. Login");
 		System.out.println("2. Exit");
 		System.out.print("Choose option: ");
@@ -83,9 +83,9 @@ public class LibraryManagementApplication implements CommandLineRunner {
 		User user = userRepository.findByUsernameAndPassword(username, password);
 		if (user != null) {
 			currentUser = user;
-			System.out.println("✅ Login successful! Welcome " + user.getUsername() + " (" + user.getRole() + ")");
+			System.out.println("Login successful! Welcome " + user.getUsername() + " (" + user.getRole() + ")");
 		} else {
-			System.out.println("❌ Invalid username or password!");
+			System.out.println("Invalid username or password!");
 		}
 	}
 
@@ -98,7 +98,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 	}
 
 	private void showStudentMenu() {
-		System.out.println("\n🎓 STUDENT MENU");
+		System.out.println("\n STUDENT MENU");
 		System.out.println("1. Browse Books");
 		System.out.println("2. Search Books");
 		System.out.println("3. Reserve Book");
@@ -135,7 +135,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 	}
 
 	private void showLibrarianMenu() {
-		System.out.println("\n👨‍💼 LIBRARIAN MENU");
+		System.out.println("\n LIBRARIAN MENU");
 		System.out.println("1. Browse Books");
 		System.out.println("2. Add New Book");
 		System.out.println("3. Delete Book");
@@ -176,7 +176,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 	}
 
 	private void browseBooks() {
-		System.out.println("\n📚 ALL BOOKS");
+		System.out.println("\n ALL BOOKS");
 		List<Book> books = bookRepository.findAll();
 
 		if (books.isEmpty()) {
@@ -186,7 +186,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 
 		for (int i = 0; i < books.size(); i++) {
 			Book book = books.get(i);
-			String status = book.isAvailable() ? "✅ AVAILABLE" : "❌ RESERVED";
+			String status = book.isAvailable() ? "AVAILABLE" : "RESERVED";
 			System.out.println((i + 1) + ". " + book.getTitle() + " by " + book.getAuthor());
 			System.out.println("   ISBN: " + book.getIsbn() + " | Status: " + status);
 			System.out.println();
@@ -204,10 +204,10 @@ public class LibraryManagementApplication implements CommandLineRunner {
 			return;
 		}
 
-		System.out.println("\n🔍 SEARCH RESULTS");
+		System.out.println("\n SEARCH RESULTS");
 		for (int i = 0; i < books.size(); i++) {
 			Book book = books.get(i);
-			String status = book.isAvailable() ? "✅ AVAILABLE" : "❌ RESERVED";
+			String status = book.isAvailable() ? "AVAILABLE" : "RESERVED";
 			System.out.println((i + 1) + ". " + book.getTitle() + " by " + book.getAuthor());
 			System.out.println("   ISBN: " + book.getIsbn() + " | Status: " + status);
 			System.out.println();
@@ -216,7 +216,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 
 	private void reserveBook() {
 		if (!"STUDENT".equals(currentUser.getRole())) {
-			System.out.println("❌ Only students can reserve books!");
+			System.out.println("Only students can reserve books!");
 			return;
 		}
 
@@ -227,13 +227,13 @@ public class LibraryManagementApplication implements CommandLineRunner {
 
 		List<Book> books = bookRepository.findAll();
 		if (bookNumber < 1 || bookNumber > books.size()) {
-			System.out.println("❌ Invalid book number!");
+			System.out.println("Invalid book number!");
 			return;
 		}
 
 		Book book = books.get(bookNumber - 1);
 		if (!book.isAvailable()) {
-			System.out.println("❌ Book is already reserved!");
+			System.out.println("Book is already reserved!");
 			return;
 		}
 
@@ -247,18 +247,18 @@ public class LibraryManagementApplication implements CommandLineRunner {
 		book.setAvailable(false);
 		bookRepository.save(book);
 
-		System.out.println("✅ Book reserved successfully! Expires at: " + expiry);
+		System.out.println("Book reserved successfully! Expires at: " + expiry);
 	}
 
 	private void viewMyReservations() {
 		List<reservation> reservations = reservationRepository.findByUserId(currentUser.getId());
 
 		if (reservations.isEmpty()) {
-			System.out.println("📭 You have no active reservations.");
+			System.out.println("You have no active reservations.");
 			return;
 		}
 
-		System.out.println("\n📋 YOUR RESERVATIONS");
+		System.out.println("\n YOUR RESERVATIONS");
 		for (int i = 0; i < reservations.size(); i++) {
 			reservation res = reservations.get(i);
 			System.out.println((i + 1) + ". " + res.getBook().getTitle());
@@ -277,7 +277,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 
 		List<reservation> reservations = reservationRepository.findByUserId(currentUser.getId());
 		if (resNumber < 1 || resNumber > reservations.size()) {
-			System.out.println("❌ Invalid reservation number!");
+			System.out.println("Invalid reservation number!");
 			return;
 		}
 
@@ -290,12 +290,12 @@ public class LibraryManagementApplication implements CommandLineRunner {
 		book.setAvailable(true);
 		bookRepository.save(book);
 
-		System.out.println("✅ Reservation cancelled successfully!");
+		System.out.println("Reservation cancelled successfully!");
 	}
 
 	private void addBook() {
 		if (!"LIBRARIAN".equals(currentUser.getRole())) {
-			System.out.println("❌ Only librarians can add books!");
+			System.out.println("Only librarians can add books!");
 			return;
 		}
 
@@ -309,12 +309,12 @@ public class LibraryManagementApplication implements CommandLineRunner {
 		Book book = new Book(title, author, isbn);
 		bookRepository.save(book);
 
-		System.out.println("✅ Book added successfully!");
+		System.out.println("Book added successfully!");
 	}
 
 	private void deleteBook() {
 		if (!"LIBRARIAN".equals(currentUser.getRole())) {
-			System.out.println("❌ Only librarians can delete books!");
+			System.out.println("Only librarians can delete books!");
 			return;
 		}
 
@@ -325,7 +325,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 
 		List<Book> books = bookRepository.findAll();
 		if (bookNumber < 1 || bookNumber > books.size()) {
-			System.out.println("❌ Invalid book number!");
+			System.out.println("Invalid book number!");
 			return;
 		}
 
@@ -338,13 +338,13 @@ public class LibraryManagementApplication implements CommandLineRunner {
 		// Then delete book
 		bookRepository.delete(book);
 
-		System.out.println("✅ Book deleted successfully!");
+		System.out.println("Book deleted successfully!");
 	}
 
 	private void viewAllUsers() {
 		List<User> users = userRepository.findAll();
 
-		System.out.println("\n👥 ALL USERS");
+		System.out.println("\n ALL USERS");
 		for (User user : users) {
 			System.out.println("- " + user.getUsername() + " (" + user.getRole() + ")");
 		}
@@ -361,13 +361,13 @@ public class LibraryManagementApplication implements CommandLineRunner {
 		User student = new User(username, email, password, "STUDENT");
 		userRepository.save(student);
 
-		System.out.println("✅ Student added successfully!");
+		System.out.println(" Student added successfully!");
 	}
 
 	private void viewAllReservations() {
 		List<reservation> reservations = reservationRepository.findAll();
 
-		System.out.println("\n📊 ALL RESERVATIONS");
+		System.out.println("\n ALL RESERVATIONS");
 		for (reservation res : reservations) {
 			System.out.println("- " + res.getUser().getUsername() + " reserved " + res.getBook().getTitle());
 			System.out.println("  Status: " + res.getStatus() + " | Expires: " + res.getExpiryDate());
@@ -375,7 +375,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
 	}
 
 	private void logout() {
-		System.out.println("👋 Goodbye " + currentUser.getUsername() + "!");
+		System.out.println("Goodbye " + currentUser.getUsername() + "!");
 		currentUser = null;
 	}
 }
