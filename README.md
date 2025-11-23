@@ -358,5 +358,5 @@ After complete testing, the system should:
 
 **All testing should be performed sequentially following the test cases above.**
 
-### Screenshots
+## Screenshots
 
