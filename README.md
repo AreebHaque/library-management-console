@@ -27,7 +27,7 @@ A console based Library Management System built with Spring Boot to automate lib
 - System monitoring
 - Manual reservation management
 
-### Technology Used
+## Technology Used
 
 #### Backend
 - **Spring Boot 3.5.8** - Application framework
