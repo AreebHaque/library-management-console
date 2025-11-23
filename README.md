@@ -79,7 +79,7 @@ library-management-console/
 
 
 
-### Steps to Install and run the project
+## Steps to Install and run the project
 
 #### Prerequisites
 - **Java JDK 17 or higher** - [Download here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
